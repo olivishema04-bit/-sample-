@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ESP32 Live Sensor Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Reliable CDN for MQTT.js browser library -->
+  <script src="https://jsdelivr.net"></script>
+</head>
+<body>
+  <div class="dashboard">
+    <header>
+      <div>
+        <h1>ESP32 Live Sensor Dashboard</h1>
+        <p id="broker-info" class="sub-text">Connecting to broker.hivemq.com...</p>
+      </div>
+      <div id="connection-status" class="badge disconnected">Connecting...</div>
+    </header>
+
+    <div class="cards-grid">
+      <!-- Calibrated Voltage & Percentage Card -->
+      <div class="card">
+        <h2>Potentiometer Reading (5V Scale)</h2>
+        <div class="voltage-display">
+          <span id="volt">0.00</span><small>V</small>
+        </div>
+        <div class="percent-badge">
+          Level: <strong id="percent">0</strong>%
+        </div>
+        <div class="progress-bar">
+          <div id="volt-bar" class="progress-fill"></div>
+          <div class="threshold-marker" title="80% Trigger (4.00V)"></div>
+        </div>
+        <p class="hint">LED turns ON automatically at &ge; 80% (4.00V)</p>
+      </div>
+
+      <!-- LED Status Card -->
+      <div class="card">
+        <h2>LED Status</h2>
+        <div class="led-wrapper">
+          <div id="led-bulb" class="led-bulb off"></div>
+          <span id="status">OFF</span>
+        </div>
+        <p class="hint" id="trigger-info">Waiting for 80% threshold...</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
